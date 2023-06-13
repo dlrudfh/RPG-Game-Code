@@ -4,9 +4,9 @@ public class Movement2D : MonoBehaviour
 {
 	private float moveSpeed;
 	private Vector3 moveDirection;
-	public int jumpCount; // Á¡ÇÁÈ½¼ö(ÀÌ´ÜÁ¡ÇÁ È°¿ë)
-	bool doNotJump; // Á¡ÇÁ¸¦ ÇÒ ¼ö ¾ø´Â »óÅÂ
-	public bool doNotDash; // ´ë½Ã¸¦ ÇÒ ¼ö ¾ø´Â »óÅÂ
+	public int jumpCount; // ì í”„íšŸìˆ˜(ì´ë‹¨ì í”„ í™œìš©)
+	bool doNotJump; // ì í”„ë¥¼ í•  ìˆ˜ ì—†ëŠ” ìƒíƒœ
+	public bool doNotDash; // ëŒ€ì‹œë¥¼ í•  ìˆ˜ ì—†ëŠ” ìƒíƒœ
 	public bool dashCooltime;
 	private Animator anime;
 
@@ -16,84 +16,84 @@ public class Movement2D : MonoBehaviour
 		moveSpeed = speed;
 	}
 
-	// Á¡ÇÁ
+	// ì í”„
     public void Jump(Animator a, AudioSource j)
     {
 		anime = a;
-		// Á¡ÇÁ¸¦ ÇÒ ¼ö ÀÖ´Â »óÅÂ¶ó¸é
+		// ì í”„ë¥¼ í•  ìˆ˜ ìˆëŠ” ìƒíƒœë¼ë©´
 		if (doNotJump == false)
         {
-			// Á¡ÇÁ º¯¼ö true(Á¡ÇÁ ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı)
+			// ì í”„ ë³€ìˆ˜ true(ì í”„ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ)
 			anime.SetBool("isJumping", true);
-			// Á¡ÇÁÄ«¿îÆ®°¡ 1 ÀÌÇÏÀÏ ¶§(Á¡ÇÁ °¡´É È½¼ö°¡ ³²¾ÆÀÖ´Ù¸é)
+			// ì í”„ì¹´ìš´íŠ¸ê°€ 1 ì´í•˜ì¼ ë•Œ(ì í”„ ê°€ëŠ¥ íšŸìˆ˜ê°€ ë‚¨ì•„ìˆë‹¤ë©´)
 			if (jumpCount <= 1)
             {
 				j.Play();
 				jumpCount++;
-				// À§·Î 10ÀÇ ¼Óµµ·Î Á¡ÇÁ
+				// ìœ„ë¡œ 10ì˜ ì†ë„ë¡œ ì í”„
 				GetComponent<Rigidbody2D>().velocity = Vector2.up * 10;
 			}
 		}
 	}
 
-	// ÇÏÇâ Á¡ÇÁ
+	// í•˜í–¥ ì í”„
 	public void Down(Animator a, AudioSource j)
 	{
 		anime = a;
-		// ÇÃ·¹ÀÌ¾îÀÇ yÃà ¼Óµµ°¡ 0ÀÏ °æ¿ì(ÇÏÇâÁ¡ÇÁ¸¦ ÇÏ·Á¸é ¹Ù´Ú¿¡ ´ê¾Æ ÀÖ¾î¾ß ÇÏ±â ¶§¹®)
+		// í”Œë ˆì´ì–´ì˜ yì¶• ì†ë„ê°€ 0ì¼ ê²½ìš°(í•˜í–¥ì í”„ë¥¼ í•˜ë ¤ë©´ ë°”ë‹¥ì— ë‹¿ì•„ ìˆì–´ì•¼ í•˜ê¸° ë•Œë¬¸)
 		if (GetComponent<Rigidbody2D>().velocity.y == 0)
 		{
-			// ÇÏ°­ º¯¼ö true(ÇÏ°­ ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı)
+			// í•˜ê°• ë³€ìˆ˜ true(í•˜ê°• ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ)
 			anime.SetBool("isFalling", true);
 			j.Play();
 			PlayerPrefs.SetInt("FALL", 1);
 		}
 	}
 
-	// ´ë½Ã
+	// ëŒ€ì‹œ
 	public void Dash(int dir, Animator a, AudioSource d)
     {
-		// ´ë½Ã¸¦ ÇÒ ¼ö ÀÖ´Â »óÅÂ¶ó¸é
+		// ëŒ€ì‹œë¥¼ í•  ìˆ˜ ìˆëŠ” ìƒíƒœë¼ë©´
 		if(!doNotDash && !dashCooltime)
         {
 			d.Play();
-			// ´ë½Ã Áß¿¡´Â ´ë½Ã, Á¡ÇÁ ¸ğµÎ ºÒ°¡´É
+			// ëŒ€ì‹œ ì¤‘ì—ëŠ” ëŒ€ì‹œ, ì í”„ ëª¨ë‘ ë¶ˆê°€ëŠ¥
 			doNotDash = true;
 			doNotJump = true;
 			dashCooltime = true;
 			anime = a;
-			// ´ë½Ã º¯¼ö true(´ë½Ã ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı)
+			// ëŒ€ì‹œ ë³€ìˆ˜ true(ëŒ€ì‹œ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ)
 			anime.SetBool("isDashing", true);
-			// ÇÔ¼öÀÇ ÀÎÀÚ·Î ÁÖ¾îÁø ÇÃ·¹ÀÌ¾î ¹æÇâ °ªÀ» ±â¹İÀ¸·Î 15ÀÇ ¼Óµµ·Î Àü¹æÀ¸·Î ´ë½Ã
+			// í•¨ìˆ˜ì˜ ì¸ìë¡œ ì£¼ì–´ì§„ í”Œë ˆì´ì–´ ë°©í–¥ ê°’ì„ ê¸°ë°˜ìœ¼ë¡œ 15ì˜ ì†ë„ë¡œ ì „ë°©ìœ¼ë¡œ ëŒ€ì‹œ
 			gameObject.GetComponent<Rigidbody2D>().velocity = ((dir==1 ? Vector2.right : Vector2.left)) * 15.0f;
-			// ´ë½Ã Áß¿¡´Â ¾Æ·¡·Î ¶³¾îÁöÁö ¾ÊÀ½
+			// ëŒ€ì‹œ ì¤‘ì—ëŠ” ì•„ë˜ë¡œ ë–¨ì–´ì§€ì§€ ì•ŠìŒ
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-			// 0.2ÃÊ µ¿¾È ´ë½Ã ÈÄ Á¾·á
+			// 0.2ì´ˆ ë™ì•ˆ ëŒ€ì‹œ í›„ ì¢…ë£Œ
 			Invoke("DashEnd", 0.2f);
 		}
     }
 
-	// ´ë½Ã Á¾·á
+	// ëŒ€ì‹œ ì¢…ë£Œ
 	private void DashEnd()
     {
-		// ´ë½Ã ¾Ö´Ï¸ŞÀÌ¼Ç Á¾·á, ÇÏ°­ ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà(¹Ù´Ú¿¡¼­ ´ë½Ã¸¦ »ç¿ëÇßÀ» °æ¿ì
-		// ÇÏ°­ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ÁßÁöµÇ°í idle ¾Ö´Ï¸ŞÀÌ¼ÇÀ¸·Î ÀÚµ¿ ÀüÈ¯µÊ)
+		// ëŒ€ì‹œ ì• ë‹ˆë©”ì´ì…˜ ì¢…ë£Œ, í•˜ê°• ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰(ë°”ë‹¥ì—ì„œ ëŒ€ì‹œë¥¼ ì‚¬ìš©í–ˆì„ ê²½ìš°
+		// í•˜ê°• ì• ë‹ˆë©”ì´ì…˜ì´ ì¤‘ì§€ë˜ê³  idle ì• ë‹ˆë©”ì´ì…˜ìœ¼ë¡œ ìë™ ì „í™˜ë¨)
 		anime.SetBool("isFalling", true);
 		anime.SetBool("isDashing", false);
-		// ÇÃ·¹ÀÌ¾îÀÇ Áß·Â °ª º¹±¸
+		// í”Œë ˆì´ì–´ì˜ ì¤‘ë ¥ ê°’ ë³µêµ¬
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
-		// ´ë½Ã°¡ Á¾·áµÇ¾úÀ¸¹Ç·Î Á¡ÇÁ °¡´É
+		// ëŒ€ì‹œê°€ ì¢…ë£Œë˜ì—ˆìœ¼ë¯€ë¡œ ì í”„ ê°€ëŠ¥
 		doNotJump = false;
 		Invoke("CanDash", 0.1f);
-		// ´ë½Ã ·¹º§¿¡ µû¸¥ ÄğÅ¸ÀÓ ºÎ¿©
+		// ëŒ€ì‹œ ë ˆë²¨ì— ë”°ë¥¸ ì¿¨íƒ€ì„ ë¶€ì—¬
 		Invoke("DoNotDash", 3.3f-(0.3f*PlayerPrefs.GetInt("DASHLV")));
 	}
 
-	// ´ë½Ã°¡ ³¡³ª°í ¹Ù·Î ´ë½Ã°¡ °¡´ÉÇÑ »óÅÂ¸¦ ¸¸µé¾î ÁÖ°Ô µÇ¸é
-	// yÃà ¼Óµµ°¡ 0ÀÏ ¶§ Á¡ÇÁÄ«¿îÆ® °Ë»ç¸¦ ÇÏ°Ô µÇ¾î
-	// ´ë½Ã¸¦ ÇÒ ¶§¸¶´Ù Á¡ÇÁ¸¦ 1È¸ Ãß°¡·Î ÇÒ ¼ö ÀÖ´Â ¹®Á¦°¡ ÀÖÀ¸¹Ç·Î
-	// ¾à°£ÀÇ ÅÒÀ» µÎ°í º¯¼ö¸¦ ¹Ù²ãÁÜ
+	// ëŒ€ì‹œê°€ ëë‚˜ê³  ë°”ë¡œ ëŒ€ì‹œê°€ ê°€ëŠ¥í•œ ìƒíƒœë¥¼ ë§Œë“¤ì–´ ì£¼ê²Œ ë˜ë©´
+	// yì¶• ì†ë„ê°€ 0ì¼ ë•Œ ì í”„ì¹´ìš´íŠ¸ ê²€ì‚¬ë¥¼ í•˜ê²Œ ë˜ì–´
+	// ëŒ€ì‹œë¥¼ í•  ë•Œë§ˆë‹¤ ì í”„ë¥¼ 1íšŒ ì¶”ê°€ë¡œ í•  ìˆ˜ ìˆëŠ” ë¬¸ì œê°€ ìˆìœ¼ë¯€ë¡œ
+	// ì•½ê°„ì˜ í…€ì„ ë‘ê³  ë³€ìˆ˜ë¥¼ ë°”ê¿”ì¤Œ
 	private void CanDash()
     {
 		doNotDash = false;
@@ -101,13 +101,13 @@ public class Movement2D : MonoBehaviour
 
 	private void DoNotDash()
     {
-		// Invoke¸¦ ÅëÇØ ÄğÅ¸ÀÓ ¸¸Å­ÀÇ ½Ã°£ÀÌ °æ°úÇÑ µÚ ´Ù½Ã ´ë½Ã°¡ °¡´ÉÇØÁü
+		// Invokeë¥¼ í†µí•´ ì¿¨íƒ€ì„ ë§Œí¼ì˜ ì‹œê°„ì´ ê²½ê³¼í•œ ë’¤ ë‹¤ì‹œ ëŒ€ì‹œê°€ ê°€ëŠ¥í•´ì§
 		dashCooltime = false;
 	}
 
 	private void Update()
 	{
-		// »õ·Î¿î À§Ä¡ = ÇöÀç À§Ä¡ + (¹æÇâ * ¼Óµµ)
+		// ìƒˆë¡œìš´ ìœ„ì¹˜ = í˜„ì¬ ìœ„ì¹˜ + (ë°©í–¥ * ì†ë„)
 		transform.position += moveDirection * moveSpeed * Time.deltaTime;
 	}
 }
