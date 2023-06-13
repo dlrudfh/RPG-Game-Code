@@ -35,6 +35,8 @@ public class Portal : MonoBehaviour
         // 포탈에 접근해 액션 버튼을 눌렀을 때
         if (Input.GetKeyUp((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("ACTION"), true)) && nearby)
         {
+            // 씬 저장
+            PlayerPrefs.SetString("Scene", scene);
             //씬 로드 후 좌표 설정, 효과음 재생
             SceneManager.LoadScene(scene);
             PlayerPrefs.SetFloat("x", x);

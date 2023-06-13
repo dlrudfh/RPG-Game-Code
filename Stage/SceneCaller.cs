@@ -10,12 +10,14 @@ public class SceneCaller : MonoBehaviour
         PlayerPrefs.SetFloat("CHP", PlayerPrefs.GetFloat("HP"));
         // 게임 오버했을 때 비활성화한 UI를 재활성화
         GameObject.Find("System").GetComponent<UIinfo>().Activate();
+        // 씬 저장
+        PlayerPrefs.SetString("Scene", scene);
         // 씬 로드
         SceneManager.LoadScene(scene);
     }
 
     // 게임을 처음 시작할 때 호출되는 씬 로드 함수
-    public void GameStart(string scene)
+    public void GameStart()
     {
         //체력 최대치로 회복
         PlayerPrefs.SetFloat("CHP", PlayerPrefs.GetFloat("HP"));
@@ -24,7 +26,8 @@ public class SceneCaller : MonoBehaviour
         s.GetChild(0).gameObject.SetActive(true);
         s.GetChild(1).gameObject.SetActive(true);
         s.GetChild(2).gameObject.SetActive(true);
-        SceneManager.LoadScene(scene);
+        // 이전에 종료한 씬에서 재시작
+        SceneManager.LoadScene(PlayerPrefs.GetString("Scene"));
         //플레이어를 알맞은 위치로 이동시키기 위한 좌표
         PlayerPrefs.SetFloat("x", -6);
         PlayerPrefs.SetFloat("y", -4.5f);

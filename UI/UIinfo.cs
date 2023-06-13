@@ -19,17 +19,17 @@ public class UIinfo : MonoBehaviour
     private void Awake()
     {
         // 플레이어 정보 초기화(테스트용)
-        PlayerPrefs.SetInt("SwitchLock", 0);
+        /*PlayerPrefs.SetInt("SwitchLock", 0);
         PlayerPrefs.SetFloat("SPEED", 5);
         PlayerPrefs.SetFloat("CHP", 3);
-        PlayerPrefs.SetInt("LV", 5);
+        PlayerPrefs.SetInt("LV", 1);
         PlayerPrefs.SetInt("PTS", 0);
         PlayerPrefs.SetFloat("DMG", 1);
         PlayerPrefs.SetInt("XP", 0);
         PlayerPrefs.SetFloat("HP", 3);
         PlayerPrefs.SetInt("GOLD", 0);
         PlayerPrefs.SetInt("CHARGESHOTLV", 0);
-        PlayerPrefs.SetInt("DASHLV", 10);
+        PlayerPrefs.SetInt("DASHLV", 0);
         PlayerPrefs.SetInt("HEALLV", 0);
         PlayerPrefs.SetString("LEFT", "LeftArrow");
         PlayerPrefs.SetString("RIGHT", "RightArrow");
@@ -48,8 +48,9 @@ public class UIinfo : MonoBehaviour
         PlayerPrefs.SetString("CLOSE", "Escape");
         PlayerPrefs.SetFloat("MUSIC", 0.1f);
         PlayerPrefs.SetFloat("EFFECT", 0.1f);
-        //PlayerPrefs.SetFloat("x",-0.5f);
-        //PlayerPrefs.SetFloat("y", 4.5f);
+        PlayerPrefs.SetString("Scene", "Village");
+        PlayerPrefs.SetFloat("x",-0.5f);
+        PlayerPrefs.SetFloat("y", 4.5f);*/
         //빌드 직전에 한번 실행하고 종료 후 윗부분 주석처리
         ApplyKey();
     }

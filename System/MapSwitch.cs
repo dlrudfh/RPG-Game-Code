@@ -14,6 +14,8 @@ public class MapSwitch : MonoBehaviour
         // 보스전 등 맵 이동이 불가능한 상태가 아닐 때
         if (collision.gameObject.CompareTag("Player") && PlayerPrefs.GetInt("SwitchLock") == 0)
         {
+            // 씬 저장
+            PlayerPrefs.SetString("Scene", scene);
             // 씬 전환 후 좌표 설정
             SceneManager.LoadScene(scene);
             PlayerPrefs.SetFloat("x", x);
