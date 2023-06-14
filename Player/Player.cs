@@ -17,8 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] KeyCode dash;
     [SerializeField] KeyCode heal;
     [SerializeField] KeyCode action;
-    float slip = 1;
-    //
+    float slip;
 
     [SerializeField] bool canDown; // 하향점프의 가능 여부
     [SerializeField] Animator anime;
@@ -40,7 +39,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         speed = PlayerPrefs.GetFloat("SPEED");
-        dir = 1;
+        // 맵을 이동했을 때 플레이어 위치에 따른 방향 설정
+        if (transform.position.x >= 0) dir = -1;
+        else dir = 1;
         audioSource = GetComponent<AudioSource>();
         // 키세팅 함수 실행
         Key();

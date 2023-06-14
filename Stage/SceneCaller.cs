@@ -26,12 +26,16 @@ public class SceneCaller : MonoBehaviour
         s.GetChild(0).gameObject.SetActive(true);
         s.GetChild(1).gameObject.SetActive(true);
         s.GetChild(2).gameObject.SetActive(true);
+        s.GetChild(3).gameObject.SetActive(true);
         // 첫 시작 시 village 맵에서 시작
-        if (PlayerPrefs.GetString("Scene") == "") SceneManager.LoadScene("Village");
+        if (PlayerPrefs.GetString("Scene") == "")
+        {
+            SceneManager.LoadScene("Village");
+            //플레이어를 알맞은 위치로 이동시키기 위한 좌표
+            PlayerPrefs.SetFloat("x", -6);
+            PlayerPrefs.SetFloat("y", -4.5f);
+        }
         // 이전에 종료한 씬에서 재시작
         else SceneManager.LoadScene(PlayerPrefs.GetString("Scene"));
-        //플레이어를 알맞은 위치로 이동시키기 위한 좌표
-        PlayerPrefs.SetFloat("x", -6);
-        PlayerPrefs.SetFloat("y", -4.5f);
     }
 }

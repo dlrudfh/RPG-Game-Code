@@ -49,11 +49,14 @@ public class Enemy : MonoBehaviour
         if (anime.GetBool("Die")) return;
         // 총알과 접촉 시
         if (collision.CompareTag("bullet") || collision.CompareTag("chargedBullet"))
-        {   
+        {
             // 총알 혹은 차지 공격의 데미지 만큼 오브젝트의 체력 감소
-            if (collision.CompareTag("bullet")) Destroy(collision.gameObject);
-            if (collision.CompareTag("bullet")) curHp -= PlayerPrefs.GetFloat("DMG");
-            else curHp -= PlayerPrefs.GetFloat("DMG") * (1 + PlayerPrefs.GetInt("CHARGESHOT")*0.4f);
+            if (collision.CompareTag("bullet"))
+            {
+                Destroy(collision.gameObject);
+                curHp -= PlayerPrefs.GetFloat("DMG");
+            }
+            else curHp -= PlayerPrefs.GetFloat("DMG") * (1 + PlayerPrefs.GetInt("CHARGESHOTLV")*0.4f);
             // 피격 애니메이션 실행
             StopCoroutine("HitColorAnimation");
             StartCoroutine("HitColorAnimation");

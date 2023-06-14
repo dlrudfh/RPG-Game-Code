@@ -9,7 +9,7 @@ public class TileChange : MonoBehaviour
     [SerializeField] int maxX = 0;
     [SerializeField] int minY = 0;
     [SerializeField] int maxY = 0;
-    [SerializeField] Vector3Int[] vector; // 타일을 변경할 위치 벡터 집합
+    Vector3Int[] vector; // 타일을 변경할 위치 벡터 집합
     [SerializeField] TileBase[] t1; // 변경할 타일 집합
     [SerializeField] TileBase[] t2; // 기존 타일 집합
     

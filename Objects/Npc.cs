@@ -111,6 +111,31 @@ public class Npc : MonoBehaviour
         canTalk = true;
     }
 
+    // MaskDude 대화 스크립트
+    void MaskDude2()
+    {
+        canTalk = false;
+        switch (textNum)
+        {
+            case 0:
+                chatWindow.SetActive(true);
+                questText.GetComponent<TextMeshProUGUI>().text = "Do you want to go beyond?";
+                break;
+            case 1:
+                questText.GetComponent<TextMeshProUGUI>().text = "That area is very slippery and you can encounter powerful monsters.";
+                break;
+            case 2:
+                questText.GetComponent<TextMeshProUGUI>().text = "Be careful.";
+                break;
+            case 3:
+                chatWindow.SetActive(false);
+                textNum = -1;
+                break;
+        }
+        textNum++;
+        canTalk = true;
+    }
+
     // Developer 대화 스크립트
     void Developer()
     {
